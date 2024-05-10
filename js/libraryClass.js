@@ -321,7 +321,7 @@ library.borrowBook(patron2, book2.title);
 horizont('LIBRARY DETAILS');
 log(library);
 
-library = JSON.parse(localStorage.getItem('library2'));
+// library = JSON.parse(localStorage.getItem('library2')) || library;
 console.log(library);
 
 // localStorage.setItem('library2', JSON.stringify(library));
