@@ -3,38 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+
+
     <script src="js/libraryClass.js" defer></script>
     <script src="js/app.js" defer></script>
     <title>Test</title>
 
 </head>
 <body>
-    <div class="book">
-        <h3>New Book</h3>
-        <label for="">
-            ISBN
-        </label>
-        <input type="text" id="bookIsbn">
-        <br>
-        <label for="">
-            Title
-        </label>
-        <input type="text" id="bookTitle">
-        <br>
-        <label for="">
-            Author
-        </label>
-        <input type="text" id="bookAuthor">
-        <br>
-        <label for="">
-            Year
-        </label>
-        <input type="text" id="bookYear">
-        <br>
-        <input type="submit" value="Save Book" id="saveBook">
-        <p id="bookStatusMsg"></p>    
-    </div>
+    <div class="library-input-container">
+        <div class="book book-input library-input">
+            <h3>New Book</h3>
+            <div class="input-container">
+                <label for="bookIsbn">ISBN</label>
+                <input type="text" id="bookIsbn">
+            </div>
+            
+            <div class="input-container">
+                <label for="bookTitle">Title</label>
+                <input type="text" id="bookTitle">
+            </div>
+            
+            <div class="input-container">
+                <label for="bookAuthor">Author</label>
+                <input type="text" id="bookAuthor">
+            </div>
+            
+            <div class="input-container">
+                <label for="bookYear">Year</label>
+                <input type="text" id="bookYear">
+            </div>
+        
+            <input type="submit" value="Save Book" id="saveBook">
+            <p id="bookStatusMsg"></p>    
+        </div>
 
+        <div class="patron patron-input library-input">
+            <h3>New Patron</h3>
+            
+            <div class="input-container">
+                <label for="firstName">First Name</label>
+                <input type="text" name="" id="firstName">
+            </div>
+
+            
+            <div class="input-container">
+                <label for="lastName">Last Name</label>
+                <input type="text" name="" id="lastName">
+            </div>
+
+            
+            <div class="input-container">
+                <label for="age">Age</label>
+                <input type="text" name="" id="age">
+            </div>
+
+            <input type="submit" name="" value="Save Patron" id="savePatron">
+        </div>
+    </div>
+    
+   <div class="tables">
+    <h3>.</h3>
     <table class="bookTable">
         <caption>Library Book Table</caption>
         <tbody id="bookTableBody">
@@ -61,5 +91,6 @@
         </tbody>
     </table>
     <p id="bookTableStatusMsg"></p>
+   </div>
 </body>
 </html>
