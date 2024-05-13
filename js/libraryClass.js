@@ -2,13 +2,13 @@ console.group('libraryClass.js');
 
 /* 
 BUG
-=> a book can be borrowed twice by the same patron
-=> two different patrons can borrow the same book
+=>  a book can be borrowed twice by the same patron
+=>  two different patrons can borrow the same book
 
 FEATURES TO IMPLEMENT
 =>  check if a patron already has the book before lending, if not check if the book is not already lent
-=> patron can check all borrowed books or a particular book;
-=> set a borrow limit on patrons;
+=>  patron can check all borrowed books or a particular book;
+=>  set a borrow limit on patrons;
 =>  patron can make request for a book; added to library pending list, library can decide(based on if patron has exceeded borrow limit or not);
 =>  patron can return book to library(book automatically knows where it is from)
 
@@ -228,9 +228,14 @@ class Book {
         this._title = title;
         this._author = author;
         this._year = year;
-        this._isbn = isbn;
+        this._isbn = this.validateIsbn(isbn) ? isbn : null;
         this._isLent;
         this._patron;
+    }
+
+    validateIsbn(isbn) {
+        const isbnRegex = /^(?:\d[- ]?){9}[\d|X]$/;
+        return isbnRegex.test(isbn);
     }
     
     get isbn() {
@@ -282,9 +287,9 @@ class Book {
 
 const patron1 = new Patron('Barizaa', 'Bamidele', 21);
 const patron2 = new Patron('David', 'Orkwar', 23);
-const book1 = new Book(2878, '1984', 'George Orwell', 1924);
-const book2 = new Book(1904, 'Half of A Yellow Sun', 'Chimamanda Adichie', 2002);
-const book3 = new Book(1912, 'Leon', 'Kit De Waal', 2001);
+const book1 = new Book('3-598-21507-X', '1984', 'George Orwell', 1924);
+const book2 = new Book('99921-58-10-7', 'Half of A Yellow Sun', 'Chimamanda Adichie', 2002);
+const book3 = new Book('91322-67-51-8', 'Leon', 'Kit De Waal', 2001);
 
 
 
