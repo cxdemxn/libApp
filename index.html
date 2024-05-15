@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
 
+    <script src="js/functions.js"></script>
     <script src="js/libraryClass.js" defer></script>
     <script src="js/app.js" defer></script>
     <title>Test</title>
@@ -12,6 +13,8 @@
 </head>
 <body>
     <div class="library-input-container">
+
+        <!-- ADD BOOK -->
         <div class="book book-input library-input">
             <h3>New Book</h3>
             <div class="input-container">
@@ -38,6 +41,8 @@
             <p id="bookStatusMsg"></p>    
         </div>
 
+
+        <!-- ADD PATRON -->
         <div class="patron patron-input library-input">
             <h3>New Patron</h3>
             
@@ -55,7 +60,7 @@
             
             <div class="input-container">
                 <label for="age">Age</label>
-                <input type="text" name="" id="age">
+                <input type="number" name="" id="age">
             </div>
 
             <input type="submit" name="" value="Save Patron" id="savePatron">
@@ -91,6 +96,32 @@
         </tbody>
     </table>
     <p id="bookTableStatusMsg"></p>
+   </div>
+
+   <div class="tables">
+    <h3>.</h3>
+    <table class="patronTable">
+        <caption>Library Patron Table</caption>
+        <tbody id="patronTableBody">
+            <tr class="table-head">
+                <th>S/O</th>
+                <th>Library ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+            </tr>
+    
+            <tr class="patronTableRow">
+                <td id="patronIndex">1</td>
+                <td class="patronLibraryId">1234567</td>
+                <td class="patronFirstName">John</td>
+                <td class="patronLastName">Doe</td>
+                <td class="patronAge">99</td>
+                <td class="removePatronBtn"><button >Remove Patron</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <p id="patronTableStatusMsg"></p>
    </div>
 </body>
 </html>

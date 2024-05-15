@@ -14,45 +14,6 @@ FEATURES TO IMPLEMENT
 
 */
 
-
-const horizont = (value = '') => {
-    return log(`-------------------------         ${value}      ----------------------`);
-}
-
-const keys = (obj) => {
-    console.log(Object.keys(obj));
-};
-
-const log = (toLog) => {
-    console.log(toLog);
-};
-
-const table = (toTabulate) => {
-    console.table(toTabulate);
-}
-
-function removeCyclicReferences(obj, seen = new Set()) {
-    if (typeof obj !== 'object' || obj === null) {
-        return obj; // Base case: return primitive values and null
-    }
-
-    if (seen.has(obj)) {
-        return '[Circular]'; // return placeholder for cyclic references
-    }
-
-    seen.add(obj); //add object to set to track cyclic references
-
-    // iterate over object properties
-    for (const key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-            obj[key] = removeCyclicReferences(obj[key], seen); // recursively remove cyclic references
-        }
-    }
-
-    return obj;
-}
-
-
 class Library {
     constructor() {
         this._books = [];
@@ -81,10 +42,6 @@ class Library {
             book.isSaved = false;
             return;
         }
-        // if (this._books.includes(book)) {
-        //     console.error(`Error adding book: ${book.title} exists`);
-        //     return;
-        // }
 
 
         book.isLent = false;
@@ -101,6 +58,7 @@ class Library {
 
         patron._libraryId = this._generatePatronId();
         this._patrons.push(patron);
+        patron.isSaved = true;
 
         log(`${patron.fullName} added as Library Patron. their id is ${patron._libraryId} :)`);
     }
@@ -171,14 +129,14 @@ class Library {
         let randNum = Math.floor(Math.random() * 999999);
 
 
-        for (; this._PatronIdExists(randNum);) {
+        for (; this.patronIdExists(randNum);) {
             randNum = Math.floor(Math.random() * 999999);
         }
 
         return randNum;
     }
 
-    _PatronIdExists(id) {
+    patronIdExists(id) {
         for (const patron of this.allPatrons) {
             if (patron._libraryId === id)
                 return true;
@@ -219,6 +177,12 @@ class Patron {
             console.error(` ${this.fullName} has no books borrowed yet!`);
         }
         return this._borrowedBooks;
+    }
+    get libraryId() {
+        if (!this._libraryId) {
+            console.error(` ${this.fullName} has no books borrowed yet!`);
+        }
+        return this._libraryId;
     }
     get
 }

@@ -26,12 +26,12 @@ class BookForm {
 
         const book = new Book(isbn, title, author, year);
 
-        this.saveToLocalStorage(book);
+        this.saveToLibrary(book);
     }
 
-    saveToLocalStorage(book) {
+    saveToLibrary(book) {
         let existingLibrary = new Library();
-        existingLibrary = this._buildLib();
+        existingLibrary = buildLib('library2');
 
         existingLibrary.addBook(book);
 
@@ -53,22 +53,74 @@ class BookForm {
         }, 1500);
             return;
     }
-
-    _buildLib(lib) {
-        if (localStorage.getItem('library2')) {
-            const lib = new Library();
-            lib._books = JSON.parse(localStorage.getItem('library2'))._books;
-            return lib;
-        }
-
-        return new Library();
-    }
 }
 
 const bookForm = new BookForm();
 // console.log(bookForm.Title);
 
 console.table(JSON.parse(localStorage.getItem('library')));
+
+
+
+class PatronForm {
+    constructor() {
+        this.firstName = document.querySelector('#firstName');
+        this.lastName = document.querySelector('#lastName');
+        this.age = document.querySelector('#age');
+        this.patronStatusMsg = document.querySelector('#patronStatusMsg');
+        this.savePatronButton = document.querySelector('#savePatron');
+
+        this.savePatronButton.addEventListener('click', this.savePatron.bind(this));
+    }
+
+    savePatron() {
+        const firstName = this.firstName.value;
+        const lastName = this.lastName.value;
+        const age = this.age.value;
+
+        if (containsNumbers(firstName) || containsNumbers(lastName)) {
+            // need to find a way to display console depending on color chosen
+            console.error('name cannot contain number')
+            printStatusMsg(this.patronStatusMsg, 'name cannot contain number', 'red', 3000);
+            return;
+        }
+
+        if (!containsOnlyNumber(age)) {
+            console.error('age must contain only number')
+            printStatusMsg(this.patronStatusMsg, 'age must contain only number', 'red', 3000);
+            return;
+        }
+
+        const patron = new Patron(firstName, lastName, age);
+
+        this.saveToLibrary(patron);
+    }
+    
+    saveToLibrary(patron) {
+        let existingLibrary = new Library();
+        existingLibrary = buildLib('library2');
+
+        existingLibrary.addPatron(patron);
+
+        localStorage.setItem('library2', JSON.stringify(existingLibrary));
+        
+        printStatusMsg(this.patronStatusMsg, `${patron.fullName} added as Library Patron. their id is ${patron.libraryId} :)`, 'green', 7000);
+
+        setTimeout(() => {
+            this.firstName.value = '';
+            this.lastName.value = '';
+            this.age.value = '';
+            location.reload();
+        }, 1500);
+        return;
+    }
+}
+
+
+const patronForm = new PatronForm();
+
+
+
 
 
 
@@ -79,25 +131,16 @@ class LibraryTable {
         this.bookTableBody = document.querySelector('#bookTableBody');
         this.bookStatusMsg = document.querySelector('#bookTableStatusMsg');
 
+        this.patronTableBody = document.querySelector('')
+
         this.printBookTable();
     }
 
     printBookTable(lib) {
-        this._library = this._buildLib();
+        this._library = buildLib('library2');
         this.createBookTable();
         this.setRemoveButton();
         
-        // const bookRow = createbookRow()
-    }
-    _buildLib(lib) {
-        if (localStorage.getItem('library2')) {
-            const lib = new Library();
-            lib._books = JSON.parse(localStorage.getItem('library2'))._books;
-            lib._patrons = JSON.parse(localStorage.getItem('library2'))._patrons;
-            return lib;
-        }
-
-        return new Library();
     }
 
     createBookTable() {
@@ -139,7 +182,7 @@ class LibraryTable {
                 this._library.removeBook(bookTit);
                 console.log(this._library);
 
-                this.saveToLocalStorage();
+                this.saveToLibrary();
 
                 this.clearTable();
                 
@@ -150,7 +193,7 @@ class LibraryTable {
         });
     }
 
-    saveToLocalStorage() {
+    saveToLibrary() {
         localStorage.setItem('library2', JSON.stringify(this._library));
     }
 
