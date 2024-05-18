@@ -5,38 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/libraryClass.js" defer></script>
     <script src="js/app.js" defer></script>
+    <link rel="stylesheet" href="libapp.css">
     <title>Test</title>
 
 </head>
 <body>
     <div class="book">
-        <h3>New Book</h3>
+        <h3 class="hbook">New Book</h3>
         <label for="">
-            ISBN
-        </label>
-        <input type="text" id="bookIsbn">
+            ISBN:
+        </label><br>
+        <input type="text" id="bookIsbn" placeholder="Input Your ISBN(13 Digits)">
         <br>
         <label for="">
-            Title
-        </label>
-        <input type="text" id="bookTitle">
+            Title:
+        </label><br>
+        <input type="text" id="bookTitle" placeholder="Input Your Book Title">
         <br>
         <label for="">
-            Author
-        </label>
-        <input type="text" id="bookAuthor">
+            Author:
+        </label><br>
+        <input type="text" id="bookAuthor" placeholder="Input The Book Author">
         <br>
         <label for="">
-            Year
-        </label>
-        <input type="text" id="bookYear">
+            Year:
+        </label><br>
+        <input type="text" id="bookYear" placeholder="Input The Year Published">
         <br>
-        <input type="submit" value="Save Book" id="saveBook">
-        <p id="bookStatusMsg"></p>    
+        <input class="book-btn" type="submit" value="Save Book" id="saveBook"> <br>
+        <p id="bookStatusMsg" style="float: right; color: white; background-color: blueviolet;"></p>    
     </div>
 
-    <table class="bookTable">
-        <caption>Library Book Table</caption>
+
+<br>
+    <table class="bookTable" border="3px">
+        <h1 class="caption">Library Book Table</h1>
         <tbody id="bookTableBody">
             <tr class="table-head">
                 <th>S/O</th>
@@ -60,6 +63,31 @@
             </tr> -->
         </tbody>
     </table>
-    <p id="bookTableStatusMsg"></p>
+    <p id="bookTableStatusMsg" style="float: right; font-weight: bolder; color: rgb(0, 0, 0); background-color: blueviolet; width: fit-content; height: 30px;"></p>
+
+
+
+
+
+
+
+
+
+
+<script>
+    // script.js
+document.addEventListener('DOMContentLoaded', (event) => {
+    const button = document.querySelector('.bottom-border-button');
+    
+    button.addEventListener('mousedown', () => {
+        button.style.borderBottomWidth = '0';
+    });
+
+    button.addEventListener('mouseup', () => {
+        button.style.borderBottomWidth = '2px';
+    });
+});
+
+</script>
 </body>
 </html>
