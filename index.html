@@ -64,5 +64,30 @@
         </tbody>
     </table>
     <p id="bookTableStatusMsg" style="float: right; font-weight: bolder; color: rgb(0, 0, 0); background-color: blueviolet; width: fit-content; height: 30px;"></p>
+
+
+
+
+
+
+
+
+
+
+<script>
+    // script.js
+document.addEventListener('DOMContentLoaded', (event) => {
+    const button = document.querySelector('.bottom-border-button');
+    
+    button.addEventListener('mousedown', () => {
+        button.style.borderBottomWidth = '0';
+    });
+
+    button.addEventListener('mouseup', () => {
+        button.style.borderBottomWidth = '2px';
+    });
+});
+
+</script>
 </body>
 </html>
